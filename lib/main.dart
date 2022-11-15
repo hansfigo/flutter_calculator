@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                       txtColor: isOperator(button[index]) ? Colors.white : Colors.deepPurple.shade300 ,
                     );
                    }
-                  }),
+                  })
             ),
           )
         ],
