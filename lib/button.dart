@@ -10,7 +10,7 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(8),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
@@ -18,7 +18,7 @@ class MyButton extends StatelessWidget {
             child: Center(
               child: Text(
                 btnTetxt!,
-                style: TextStyle(color: txtColor),
+                style: TextStyle(color: txtColor, fontSize: 18, fontWeight: FontWeight.w600),
               ),
             ),
           )),
