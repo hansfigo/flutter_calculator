@@ -19,6 +19,9 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+var userAnswer = 'X' ;
+var userInput = 'X';
+
 final List<String> button = [
   'C',
   'DEL',
@@ -50,7 +53,22 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Expanded(
-            child: Container(),
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(userAnswer, style: TextStyle(fontSize: 20),)),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(userInput, style: TextStyle(fontSize: 20)))
+                  ],
+                ),
+              ),
+            ),
           ),
           Expanded(
             flex: 2,
