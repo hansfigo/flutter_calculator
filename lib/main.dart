@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-var userAnswer = 'X' ;
+var userAnswer = 'X';
 var userInput = 'X';
 
 final List<String> button = [
@@ -60,11 +60,14 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(userAnswer, style: TextStyle(fontSize: 20),)),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          userAnswer,
+                          style: TextStyle(fontSize: 20),
+                        )),
                     Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(userInput, style: TextStyle(fontSize: 20)))
+                        alignment: Alignment.centerRight,
+                        child: Text(userInput, style: TextStyle(fontSize: 20)))
                   ],
                 ),
               ),
@@ -73,36 +76,43 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             flex: 2,
             child: Container(
-              color: Colors.deepPurple.shade200,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: GridView.builder(
-                    itemCount: button.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4),
-                    itemBuilder: (BuildContext context, int index) {
-                     if (index == 0) {
-                       return MyButton(
-                        btnTetxt: button[index],
-                        btnColor: Colors.green.shade200,
-                        txtColor: Colors.white
-                      );
-                     }else if(index == 1) {
-                      return MyButton(
-                        btnTetxt: button[index],
-                        btnColor: Colors.red.shade200,
-                        txtColor: Colors.white
-                      );
-                     } else {
-                       return MyButton(
-                        btnTetxt: button[index],
-                        btnColor: isOperator(button[index]) ? Colors.deepPurple.shade100 : Colors.deepPurple.shade50 ,
-                        txtColor: isOperator(button[index]) ? Colors.white : Colors.deepPurple.shade300 ,
-                      );
-                     }
-                    }),
-              )
-            ),
+                color: Colors.deepPurple.shade200,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: GridView.builder(
+                      itemCount: button.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4),
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index == 0) {
+                          return MyButton(
+                              btnTetxt: button[index],
+                              btnColor: Colors.green.shade200,
+                              txtColor: Colors.white);
+                        } else if (index == 1) {
+                          return MyButton(
+                              btnTetxt: button[index],
+                              btnColor: Colors.red.shade200,
+                              txtColor: Colors.white);
+                        } else {
+                          return MyButton(
+                            buttonTapped: () {
+                              setState(() {
+                                userInput = userInput + button[index];
+                              });
+                            },
+                            btnTetxt: button[index],
+                            btnColor: isOperator(button[index])
+                                ? Colors.deepPurple.shade100
+                                : Colors.deepPurple.shade50,
+                            txtColor: isOperator(button[index])
+                                ? Colors.white
+                                : Colors.deepPurple.shade300,
+                          );
+                        }
+                      }),
+                )),
           )
         ],
       ),
