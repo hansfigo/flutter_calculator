@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 var userAnswer = 'X';
-var userInput = 'X';
+var userInput = '';
 
 final List<String> button = [
   'C',
@@ -62,12 +62,12 @@ class _HomePageState extends State<HomePage> {
                     Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          userAnswer,
+                          userInput,
                           style: TextStyle(fontSize: 20),
                         )),
                     Container(
                         alignment: Alignment.centerRight,
-                        child: Text(userInput, style: TextStyle(fontSize: 20)))
+                        child: Text(userAnswer, style: TextStyle(fontSize: 20)))
                   ],
                 ),
               ),
@@ -87,11 +87,22 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (BuildContext context, int index) {
                         if (index == 0) {
                           return MyButton(
+                            buttonTapped: (){
+                              setState(() {
+                                userInput = '';
+                              });
+                            },
                               btnTetxt: button[index],
                               btnColor: Colors.green.shade200,
                               txtColor: Colors.white);
+                        //DELETE BUTTON
                         } else if (index == 1) {
                           return MyButton(
+                            buttonTapped: (){
+                              setState(() {
+                                userInput = userInput.substring(0, userInput.length-1);
+                              });
+                            },
                               btnTetxt: button[index],
                               btnColor: Colors.red.shade200,
                               txtColor: Colors.white);
