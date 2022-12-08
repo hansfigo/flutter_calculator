@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/button.dart';
+import 'package:flutter_calculator/grid.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,9 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false, home: HomePage());
   }
 }
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,28 +27,7 @@ class HomePage extends StatefulWidget {
 var userAnswer = '';
 var userInput = '';
 
-final List<String> button = [
-  'C',
-  'DEL',
-  '%',
-  '/',
-  '9',
-  '8',
-  '7',
-  'X',
-  '6',
-  '5',
-  '4',
-  '-',
-  '3',
-  '2',
-  '1',
-  '+',
-  '0',
-  ',',
-  'ANS',
-  '=',
-];
+final gridViewButton gridButton = new gridViewButton();
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -81,63 +64,7 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: GridView.builder(
-                      itemCount: button.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4),
-                      itemBuilder: (BuildContext context, int index) {
-                        //CLEAR BUTTON
-                        if (index == 0) {
-                          return MyButton(
-                              buttonTapped: () {
-                                setState(() {
-                                  userInput = '';
-                                });
-                              },
-                              btnTetxt: button[index],
-                              btnColor: Colors.green.shade200,
-                              txtColor: Colors.white);
-                          //DELETE BUTTON
-                        } else if (index == 1) {
-                          return MyButton(
-                              buttonTapped: () {
-                                setState(() {
-                                  userInput = userInput.substring(
-                                      0, userInput.length - 1);
-                                });
-                              },
-                              btnTetxt: button[index],
-                              btnColor: Colors.red.shade200,
-                              txtColor: Colors.white);
-
-                          //EQUAL BUTTON
-                        } else if (index == button.length - 1) {
-                          return MyButton(
-                              buttonTapped: () {
-                                setState(() {
-                                  equalButtonPressed();
-                                });
-                              },
-                              btnTetxt: button[index],
-                              btnColor: Colors.deepPurple.shade100,
-                              txtColor: Colors.white);
-                        } else {
-                          return MyButton(
-                            buttonTapped: () {
-                              setState(() {
-                                userInput = userInput + button[index];
-                              });
-                            },
-                            btnTetxt: button[index],
-                            btnColor: isOperator(button[index])
-                                ? Colors.deepPurple.shade100
-                                : Colors.deepPurple.shade50,
-                            txtColor: isOperator(button[index])
-                                ? Colors.white
-                                : Colors.deepPurple.shade300,
-                          );
-                        }
-                      }),
+                  child: gridButton
                 )),
           )
         ],
